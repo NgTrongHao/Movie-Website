@@ -8,6 +8,7 @@ export function Banner() {
     const [videoUrl, setVideoUrl] = useState('');
     const [imageUrl, setImageUrl] = useState('');
     const [isHovered, setIsHovered] = useState(false);
+    const [shouldPlay, setShouldPlay] = useState(false);
 
     useEffect(() => {
         const imageUrl = 'https://i.ytimg.com/vi/32RAq6JzY-w/maxresdefault.jpg';
@@ -27,24 +28,38 @@ export function Banner() {
         setIsHovered(false);
     };
 
+    const handleMouseEnter = () => {
+        // Wait for 500 milliseconds (0.5 second) before starting the video
+        const playTimer = setTimeout(() => {
+            setIsHovered(true);
+            setShouldPlay(true);
+        }, 500);
+
+        return () => clearTimeout(playTimer);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+        // Ensure that the video stops when leaving, you can adjust the delay if needed
+        setTimeout(() => {
+            setShouldPlay(false);
+        }, 500);
+    };
+
     return (
         <header
             className={`banner ${shrinkBanner ? 'banner--shrink' : ''}`}
             style={{ backgroundImage: `url(${imageUrl})` }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
         >
             <div className="banner_contents">
                 <h1 className="banner_title">Fast X</h1>
-                {/*<div className="banner_buttons">*/}
-                {/*    <button className="banner_button">Play</button>*/}
-                {/*    <button className="banner_button">My List</button>*/}
-                {/*</div>*/}
                 <h1 className="banner_description">
                     Dom Toretto and his family are targeted by the vengeful son of drug kingpin Hernan Reyes.
                 </h1>
             </div>
-            <VideoPlayer videoUrl={videoUrl} isHovered={isHovered} onVideoEnd={handleVideoEnd} />
+            <VideoPlayer videoUrl={videoUrl} isHovered={isHovered && shouldPlay} onVideoEnd={handleVideoEnd} />
             <div className="banner--fadeBottom"></div>
         </header>
     );
