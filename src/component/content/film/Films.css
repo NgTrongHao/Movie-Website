@@ -1,0 +1,79 @@
+.content {
+    background: black;
+}
+.carousel-info {
+    background: transparent;
+    color: white;
+    padding: 20px;
+    text-align: match-parent;
+    font-size: large;
+
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.carousel-info p {
+    margin: 0;
+}
+
+.carousel-container {
+    width: 98%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.column {
+    margin-right: 10px;
+}
+
+.card {
+    border: none;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+    margin: 1px;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Apply blur to all images by default */
+.img-container:not(:hover) img {
+    filter: blur(0);
+    transform: scale(1);
+}
+
+/* Zoom in on hover */
+.img-container:hover img {
+    filter: blur(1px);
+    transform: scale(1.1);
+}
+
+/* Custom styles for Next and Prev arrows */
+.slick-prev,
+.slick-next {
+    font-size: 24px;
+    color: white !important; /* Ghi đè màu sắc */
+    background-color: rgba(0, 0, 0, 0.5) !important; /* Ghi đè màu nền */
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.slick-prev {
+    left: 10px;
+}
+
+.slick-next {
+    right: 10px;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+    background-color: rgba(0, 0, 0, 0.7) !important; /* Ghi đè màu nền khi hover */
+}
